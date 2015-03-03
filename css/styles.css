@@ -1,0 +1,52 @@
+/* wrapping */
+* {
+    margin: 0;
+}
+html, body {
+    height: 100%;
+}
+.page-wrap {
+    min-height: 100%;
+    min-width: 40%;
+    margin-bottom: -50px;
+}
+.page-wrap:after {
+    content: "";
+    display: block;
+}
+.site-footer, .page-wrap:after {
+    height: 50px;
+}
+.site-footer {
+    background-color: #222;
+    line-height: 50px;
+    text-align: center;
+}
+.site-footer p
+{
+    color: #eee;
+    display: inline-block;
+}
+
+/* styles for header */
+h2
+{
+    text-align: center;
+}
+
+/* styles for magic ball area */
+#magic-ball
+{
+    content: url("../images/ball.png");
+    margin: 0 auto;
+    padding: 25px;
+    text-align: center;
+}
+
+/* styles for ask area */
+.ask-element
+{
+    display:block;
+    margin: 10px auto;
+    width: 40%;
+}
