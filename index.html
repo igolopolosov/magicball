@@ -6,16 +6,16 @@
     <link href="./css/styles.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-2.1.3.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular-route.js"></script>
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.js"></script>
+    <script src="./js/index.js"></script>
+    <script src="./js/main.js"></script>
+    <script src="./js/postService.js"></script>
+    <script src="./js/routes.js"></script>
     <title>Magic Ball</title>
 </head>
-<body class="bg-info">
-    <div class="page-wrap">
-        <h2>Сконцентрируйтесь на вопросе на который можно ответить "да" или "нет".</h2>
-        <div id="magic-ball"></div>
-        <input class="form-control ask-element" placeholder="Начните вводить свой вопрос...">
-        <button class="btn btn-info ask-element">Задайте вопрос!</button>
-    </div>
+<body class="bg-info" ng-app="index" ng-cloak>
+    <div  class="page-wrap" ng-view></div>
     <footer class="site-footer">
         <p>© 2015</p>
     </footer>

@@ -38,18 +38,36 @@ h2
 }
 
 /* styles for magic ball area */
-#magic-ball
+.magic-ball-area
+{
+    position: relative;
+}
+
+.magic-ball
 {
     content: url("../images/ball.png");
     margin: 0 auto;
     padding: 25px;
     text-align: center;
 }
+.answer-element
+{
+    position: absolute;
+    top: 162px;
+    text-align: center;
+    color:#FFF;
+    font-size:20px;
+}
 
-/* styles for ask area */
-.ask-element
+/* styles for question area */
+.question-element
 {
     display: block;
     margin: 10px auto;
     width: 40%;
+}
+
+.answer-element
+{
+    width: 100%;
 }
