@@ -1,25 +1,29 @@
 var postService = angular.module('postService', ['ngRoute']);
 
-postService.factory('postService', function ($q, $http, $location) {
+postService.factory('postService', function ($q, $http) {
     'use strict';
-    var postServiceFactory = {},
-        answerText,
-        errorMessage,
+    var postService = {},
+        answerText = '',
+        errorMessage = '',
         SendQuestion = function (questionData) {
             var deferred = $q.defer(questionData);
-            $http.post('/SendQuestion', { user: questionData.userName, question: questionData.questionText }).success(function (response) {
-                answerText = response.AnswerText;
+            $http.post('api/question', {
+                user: questionData.userName,
+                question: questionData.text,
+                date: questionData.date
+            }).success(function (response) {
+                answerText = response;
                 deferred.resolve(answerText);
             }).error(function (err) {
-                errorMessage = "Sorry, couldn't connect to server";
+                errorMessage = err;
                 deferred.reject(errorMessage);
             });
             return deferred.promise;
         };
-    postServiceFactory.SendQuestion = SendQuestion;
-    postServiceFactory.answerText = answerText;
-    postServiceFactory.errorMessage = errorMessage;
-    return postServiceFactory;
+    postService.answerText = answerText;
+    postService.errorMessage = errorMessage;
+    postService.SendQuestion = SendQuestion;
+    return postService;
 });
 
 

@@ -1,5 +1,5 @@
-var index = angular.module('index',
+angular.module('index',
     ['main',
         'postService',
-        'routes']);
-
+        'routes'
+    ]);

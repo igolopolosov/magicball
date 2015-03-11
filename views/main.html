@@ -1,9 +1,10 @@
-<div ng-controller="mainController">
+<div>
     <h2>Сконцентрируйтесь на вопросе на который можно ответить "да" или "нет".</h2>
     <div class="magic-ball-area">
         <div class="magic-ball"></div>
         <div class="answer-element">{{answerText}}</div>
     </div>
-    <input class="form-control question-element" ng-model="questionData.questionText" placeholder="Начните вводить свой вопрос...">
+    <input class="form-control question-element" ng-model="questionData.text"
+           placeholder="Начните вводить свой вопрос...">
     <button class="btn btn-info question-element" ng-click="SendQuestion()">Задайте вопрос!</button>
 </div>
