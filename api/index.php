@@ -18,6 +18,32 @@ delete(table name, where clause as array)
 */
 
 // Magicball
+$app->post('/login', function () use ($app) {
+    global $db;
+    $data = json_decode($app->request->getBody());
+    $response = new stdClass();
+    $usersData = $db->select("User", "Id,Name,Password,Token", array('Name' => $data->user, 'Password' => $data->password));
+    if ($usersData["status"] == 'success') {
+        $token = md5(uniqid(mt_rand(), true));
+        $user = $usersData["data"][0];
+
+        $condition = array('Id' => $user["Id"]);
+        $mandatory = array();
+        $onUpdate = new stdClass();
+        $onUpdate->Token = $token;
+        $updatedUser = $db->update("User", $onUpdate, $condition, $mandatory);
+
+        if ($updatedUser["status"] == 'success') {
+            $response->user = $user["Name"];
+            $response->status = $usersData["status"];
+            $response->token = $token;
+        }
+    } else {
+        $response->status = $usersData["status"];
+        $response->message = 'Неправильное имя пользователя или пароль!';
+    }
+    echoResponse(200, $response);
+});
 
 $app->post('/question', function () use ($app) {
     global $db;
@@ -41,11 +67,7 @@ $app->post('/question', function () use ($app) {
     if ($rows["status"] == "success") {
         $response = $answer["Text"];
         echoResponse(200, $response);
-    } else {
-        $response = "Internal server error.";
-        echoResponse(500, $response);
     }
-
 });
 
 // Products

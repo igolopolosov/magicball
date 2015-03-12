@@ -1,0 +1,20 @@
+.modal-center-element {
+    margin: 10px auto;
+    display: block;
+    width: 60%;
+}
+
+.signin-error.ng-enter {
+    -webkit-transition: all linear 1s;
+    transition: all linear 1s;
+}
+
+.signin-error.ng-enter,
+.signin-error.ng-leave.ng-leave-active {
+    opacity: 0;
+}
+
+.signin-error.ng-leave,
+.signin-error.ng-enter.ng-enter-active {
+    opacity: 1;
+}

@@ -82,6 +82,8 @@ CREATE TABLE User
 (
   Id    INT NOT NULL AUTO_INCREMENT,
   Name  VARCHAR(100),
+  Password VARCHAR(100),
+  Token    CHAR(32),
   SexId INT,
   PRIMARY KEY (Id)
 )
@@ -150,8 +152,9 @@ INSERT INTO `Sex` (`Type`) VALUES
   ('Мужской'),
   ('Не определён');
 
-INSERT INTO `User` (`Name`, `SexId`) VALUE
-  ('Гость', 3);
+INSERT INTO `User` (`Name`, `Password`, `SexId`) VALUES
+  ('Гость', NULL, 3),
+  ('igor', 'rogi', 2);
 
 INSERT INTO `Status` (`Message`) VALUES
   ('Добавлен'),

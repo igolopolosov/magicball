@@ -1,29 +1,33 @@
-var postService = angular.module('postService', ['ngRoute']);
+var postService = angular.module('postService', []);
 
-postService.factory('postService', function ($q, $http) {
+postService.service('postService', function ($q, $http) {
     'use strict';
-    var postService = {},
-        answerText = '',
-        errorMessage = '',
-        SendQuestion = function (questionData) {
-            var deferred = $q.defer(questionData);
-            $http.post('api/question', {
-                user: questionData.userName,
-                question: questionData.text,
-                date: questionData.date
-            }).success(function (response) {
-                answerText = response;
-                deferred.resolve(answerText);
-            }).error(function (err) {
-                errorMessage = err;
-                deferred.reject(errorMessage);
-            });
-            return deferred.promise;
-        };
-    postService.answerText = answerText;
-    postService.errorMessage = errorMessage;
-    postService.SendQuestion = SendQuestion;
-    return postService;
+    this.SendQuestion = function (questionData) {
+        var deferred = $q.defer(questionData);
+        $http.post('api/question', {
+            user: questionData.userName,
+            question: questionData.text,
+            date: questionData.date
+        }).success(function (response) {
+            deferred.resolve(response);
+        }).error(function (err) {
+            deferred.reject(err);
+        });
+        return deferred.promise;
+    };
+
+    this.Login = function (authData) {
+        var deferred = $q.defer(authData);
+        $http.post('api/login', {
+            user: authData.userName,
+            password: authData.password
+        }).success(function (response) {
+            deferred.resolve(response);
+        }).error(function (err) {
+            deferred.reject(err);
+        });
+        return deferred.promise;
+    };
 });
 
 

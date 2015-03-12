@@ -5,9 +5,12 @@
 html, body {
     height: 100%;
 }
+
 .page-wrap {
     min-height: 100%;
     min-width: 600px;
+    padding-top: 50px;
+    margin-top: -50px;
     margin-bottom: -50px;
 }
 .page-wrap:after {
@@ -19,13 +22,12 @@ html, body {
 }
 .site-footer
 {
-    background-color: #222;
     line-height: 50px;
     text-align: center;
 }
 .site-footer p
 {
-    color: #eee;
+    color: #222;
     display: inline-block;
 }
 
@@ -70,4 +72,40 @@ h2
 .answer-element
 {
     width: 100%;
+}
+
+/* styles for navigation area */
+
+.navigation {
+    height: 50px;
+    min-width: 600px;
+    background: lightblue;
+}
+
+.btn-color {
+    display: inline-block;
+    height: 50px;
+    padding: 8px 20px;
+    color: #333;
+    background-color: transparent;
+    border: 0;
+    text-align: center;
+    outline: none;
+    text-decoration: none;
+    -webkit-transition: color 0.3s ease-out, background-color 0.3s ease-out;
+    transition: color 0.3s ease-out,
+    background-color 0.3s ease-out;
+}
+
+.btn-color:hover,
+.btn-color:active {
+    background-color: indigo;
+    color: #fff;
+    -webkit-transition: color 0.3s ease-in, background-color 0.3s ease-in;
+    transition: color 0.3s ease-in,
+    background-color 0.3s ease-in;
+}
+
+.btn-navigation {
+    float: right;
 }

@@ -1,0 +1,10 @@
+<div class="modal-body">
+    <input class="form-control modal-input modal-center-element" ng-model="authData.userName"
+           placeholder="Имя пользователя">
+    <input class="form-control modal-input modal-center-element" ng-model="authData.password"
+           placeholder="Пароль">
+    <button class="btn btn-info modal-center-element" ng-click="pressOk()">Войти</button>
+    <div class="alert alert-danger modal-center-element signin-error" role="alert" ng-if="alert.isError">
+        {{alert.text}}
+    </div>
+</div>

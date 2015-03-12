@@ -1,0 +1,6 @@
+<div ng-controller="navigationController">
+    <button class="btn-color btn-navigation" ng-click="openSignModal()" ng-hide="authorizedUser">Войти</button>
+    <button class="btn-color btn-navigation" ng-click="signOut()" ng-show="authorizedUser">Выйти</button>
+    <button class="btn-color btn-navigation" ng-show="authorizedUser">Профиль</button>
+    <button class="btn-color btn-navigation">Магический Шар</button>
+</div>
