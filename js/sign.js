@@ -10,11 +10,15 @@ sign.controller('signController', function ($scope, $modalInstance, postService,
         isError: false,
         text: ''
     };
+    $scope.cancel = function () {
+        $modalInstance.dismiss('Close');
+    };
     $scope.pressOk = function () {
         $scope.alert.isError = false;
         postService.Login($scope.authData).then(function (response) {
             if (response.status == 'success') {
                 $sessionStorage.token = response.token;
+                $sessionStorage.userName = response.user;
                 $modalInstance.close(response.user);
             } else {
                 $scope.alert.isError = true;

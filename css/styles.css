@@ -109,3 +109,9 @@ h2
 .btn-navigation {
     float: right;
 }
+
+.modal-center-element {
+    margin: 10px auto;
+    display: block;
+    width: 60%;
+}

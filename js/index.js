@@ -1,8 +1,10 @@
 angular.module('index',
-    ['main',
+    ['join',
+        'main',
         'navigation',
+        'ngStorage',
         'postService',
+        'profile',
         'routes',
-        'sign',
-        'ngStorage'
+        'sign'
     ]);

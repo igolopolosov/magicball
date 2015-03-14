@@ -2,7 +2,7 @@
     <h2>Сконцентрируйтесь на вопросе на который можно ответить "да" или "нет".</h2>
     <div class="magic-ball-area">
         <div class="magic-ball"></div>
-        <div class="answer-element">{{answerText}}</div>
+        <div class="answer-element" ng-bind="answerText"></div>
     </div>
     <input class="form-control question-element" ng-model="questionData.text"
            placeholder="Начните вводить свой вопрос...">

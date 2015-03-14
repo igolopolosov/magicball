@@ -5,7 +5,12 @@ routes.config(function ($routeProvider) {
     $routeProvider.when('/', {
         templateUrl: './views/main.html',
         controller: 'mainController'
-    })
-        .otherwise({redirectTo: '/'});
+    }).when('/profile', {
+        templateUrl: './views/profile.html',
+        controller: 'profileController'
+    }).when('/join', {
+        templateUrl: './views/join.html',
+        controller: 'joinController'
+    }).otherwise({redirectTo: '/'});
 
 });
