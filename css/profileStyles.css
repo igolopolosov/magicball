@@ -1,0 +1,27 @@
+.profile-record {
+    margin: 10px auto;
+    padding: 5px 10px;
+    width: 50%;
+    min-width: 500px;
+    border: solid;
+    border-width: 1px;
+    border-color: gray;
+}
+
+.profile-info {
+    margin: 0 auto;
+    padding: 10px 0;
+    width: 50%;
+    min-width: 500px;
+}
+
+.btn-min {
+    padding: 0;
+    height: 10px;
+    width: 10px;
+}
+
+.percent-info {
+    margin: 0 auto;
+    padding-bottom: 10px;
+}

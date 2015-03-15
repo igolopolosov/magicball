@@ -44,7 +44,6 @@ CREATE TABLE Question
   Text     TEXT,
   DateTime DATETIME,
   AnswerId INT,
-  StatusId INT,
   UserId   INT,
   PRIMARY KEY (Id)
 )
@@ -58,18 +57,6 @@ CREATE TABLE Sex
 (
   Id   INT NOT NULL AUTO_INCREMENT,
   Type VARCHAR(10),
-  PRIMARY KEY (Id)
-)
-  ENGINE = InnoDB
-  DEFAULT CHARSET = utf8;
-
-/*==============================================================*/
-/* Table: Status                                                */
-/*==============================================================*/
-CREATE TABLE Status
-(
-  Id      INT NOT NULL AUTO_INCREMENT,
-  Message VARCHAR(10),
   PRIMARY KEY (Id)
 )
   ENGINE = InnoDB
@@ -101,11 +88,6 @@ REFERENCES AnswerType (Id)
 
 ALTER TABLE Question ADD CONSTRAINT FK_Reference_2 FOREIGN KEY (AnswerId)
 REFERENCES Answer (Id)
-  ON DELETE RESTRICT
-  ON UPDATE RESTRICT;
-
-ALTER TABLE Question ADD CONSTRAINT FK_Reference_3 FOREIGN KEY (StatusId)
-REFERENCES Status (Id)
   ON DELETE RESTRICT
   ON UPDATE RESTRICT;
 
@@ -153,9 +135,4 @@ INSERT INTO `Sex` (`Type`) VALUES
   ('Не определён');
 
 INSERT INTO `User` (`Name`, `Password`, `SexId`) VALUES
-  ('Гость', NULL, 3),
   ('igor', 'rogi', 2);
-
-INSERT INTO `Status` (`Message`) VALUES
-  ('Добавлен'),
-  ('Удалён');

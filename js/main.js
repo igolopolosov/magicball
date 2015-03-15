@@ -1,9 +1,10 @@
 var main = angular.module('main', []);
 
-main.controller('mainController', function ($scope, postService) {
+main.controller('mainController', function ($scope, postService, $sessionStorage) {
     "use strict";
+
     $scope.questionData = {
-        userName: 'Гость',
+        userName: $sessionStorage.userName,
         text: '',
         date: ''
     };
@@ -15,7 +16,6 @@ main.controller('mainController', function ($scope, postService) {
         postService.SendQuestion($scope.questionData).then(function (response) {
             $scope.answerText = response;
         }, function (err) {
-            $scope.answerText = err;
         });
     };
 });

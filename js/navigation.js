@@ -1,22 +1,26 @@
 var navigation = angular.module('navigation', ['ui.bootstrap', 'ngAnimate']);
 
-navigation.controller('navigationController', function ($scope, $modal, $location) {
+navigation.controller('navigationController', function ($scope, $modal, $location, authService) {
     "use strict";
-    $scope.authorizedUser = false;
+    $scope.authorizedUser = authService.isAuthenticated();
 
     $scope.openSignModal = function () {
         var modalInstance = $modal.open({
             templateUrl: 'views/sign.html',
             controller: 'signController'
         });
-        modalInstance.result.then(function () {
-            $scope.authorizedUser = true;
-            $location.path('/profile');
+
+        modalInstance.result.then(function (response) {
+            if (response.status == 'success') {
+                $scope.authorizedUser = authService.isAuthenticated();
+            }
         });
     };
 
     $scope.signOut = function () {
-        $scope.authorizedUser = false;
+        authService.logout();
+        $scope.authorizedUser = authService.isAuthenticated();
+        $location.path('/');
     };
 
     $scope.toMainPage = function () {

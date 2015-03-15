@@ -1,4 +1,4 @@
-<div class="modal-content">
+<div class="modal-content" ng-init="getLoginInfoByToken()">
     <div class="modal-header">
         <div class="modal-center-element">
             <button type="button" ng-click="cancel()" class="close"><span aria-hidden="true">&times;</span>
@@ -8,7 +8,7 @@
         </div>
     </div>
     <div class="modal-body">
-        <input class="form-control modal-input modal-center-element" ng-model="authData.userName"
+        <input class="form-control modal-input modal-center-element" ng-model="authData.user"
                placeholder="Имя пользователя">
         <input class="form-control modal-input modal-center-element" type="password"
                ng-model="authData.password"

@@ -45,7 +45,7 @@ $app->post('/login', function () use ($app) {
     echoResponse(200, $response);
 });
 
-$app->post('/question', function () use ($app) {
+$app->post('/add-question', function () use ($app) {
     global $db;
     $data = json_decode($app->request->getBody());
 
@@ -56,27 +56,67 @@ $app->post('/question', function () use ($app) {
     $usersData = $db->select("User", "Id", array('Name' => $data->user));
     $user = $usersData["data"][0];
 
-    $onInsert = new stdClass();
-    $onInsert->Text = $data->question;
-    $onInsert->DateTime = $data->date;
-    $onInsert->AnswerId = $answer["Id"];
-    $onInsert->StatusId = 1;
-    $onInsert->UserId = $user["Id"];
-
-    $rows = $db->insert("Question", $onInsert, array());
-    if ($rows["status"] == "success") {
-        $response = $answer["Text"];
-        echoResponse(200, $response);
+    if ($user == null) {
+        echoResponse(200, $answer["Text"]);
+    } else {
+        $onInsert = new stdClass();
+        $onInsert->Text = $data->question;
+        $onInsert->DateTime = $data->date;
+        $onInsert->AnswerId = $answer["Id"];
+        $onInsert->StatusId = 1;
+        $onInsert->UserId = $user["Id"];
+        $rows = $db->insert("Question", $onInsert, array());
+        if ($rows["status"] == "success") {
+            echoResponse(200, $answer["Text"]);
+        }
     }
 });
 
-// Products
-$app->get('/products', function () {
+$app->post('/get-questions', function () use ($app) {
     global $db;
-    $rows = $db->select("products", "id,sku,name,description,price,mrp,stock,image,packing,status", array());
-    echoResponse(200, $rows);
+    $data = json_decode($app->request->getBody());
+    $usersData = $db->select("User", "Id", array('Name' => $data->user));
+    $user = $usersData["data"][0];
+
+    $questionsData = $db->select("Question", "Id,Text,DateTime,AnswerId", array('UserId' => $user["Id"]));
+    $questions = $questionsData["data"];
+
+    foreach ($questions as &$q) {
+        $answersData = $db->select("Answer", "Text, TypeId", array('Id' => $q["AnswerId"]));
+        $answerText = $answersData["data"][0]["Text"];
+
+        $answerTypeId = $answersData["data"][0]["TypeId"];
+        $answerTypeData = $db->select("AnswerType", "Type", array('Id' => $answerTypeId));
+        $answerType = $answerTypeData["data"][0]["Type"];
+        unset($q["AnswerId"]);
+        $q["Answer"] = $answerText;
+        $q["AnswerType"] = $answerType;
+    }
+
+    $response = new stdClass();
+    $response->questions = $questions;
+    $response->status = $questionsData["status"];
+    echoResponse(200, $response);
 });
 
+$app->post('/authentication', function () use ($app) {
+    global $db;
+    $data = json_decode($app->request->getBody());
+    $usersData = $db->select("User", "Id,Name,Password", array('Token' => $data->token));
+    $user = $usersData["data"][0];
+
+    $response = new stdClass();
+    $response->status = $usersData["status"];
+
+    if ($usersData["status"] == "success") {
+        $response->user = $user["Name"];
+        $response->password = $user["Password"];
+    }
+    echoResponse(200, $response);
+
+});
+
+// Products
 $app->post('/products', function () use ($app) {
     $data = json_decode($app->request->getBody());
     $mandatory = array('name');

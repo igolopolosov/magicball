@@ -4,7 +4,7 @@ postService.service('postService', function ($q, $http) {
     'use strict';
     this.SendQuestion = function (questionData) {
         var deferred = $q.defer(questionData);
-        $http.post('api/question', {
+        $http.post('api/add-question', {
             user: questionData.userName,
             question: questionData.text,
             date: questionData.date
@@ -16,11 +16,10 @@ postService.service('postService', function ($q, $http) {
         return deferred.promise;
     };
 
-    this.Login = function (authData) {
-        var deferred = $q.defer(authData);
-        $http.post('api/login', {
-            user: authData.userName,
-            password: authData.password
+    this.GetQuestions = function (userName) {
+        var deferred = $q.defer(userName);
+        $http.post('api/get-questions', {
+            user: userName
         }).success(function (response) {
             deferred.resolve(response);
         }).error(function (err) {

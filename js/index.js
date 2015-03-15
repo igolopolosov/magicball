@@ -1,5 +1,7 @@
 angular.module('index',
-    ['join',
+    ['auth',
+        'directives',
+        'join',
         'main',
         'navigation',
         'ngStorage',

@@ -2,8 +2,10 @@
 * {
     margin: 0;
 }
+
 html, body {
     height: 100%;
+    background: lightgoldenrodyellow;
 }
 
 .page-wrap {
@@ -13,64 +15,61 @@ html, body {
     margin-top: -50px;
     margin-bottom: -50px;
 }
+
 .page-wrap:after {
     content: "";
     display: block;
 }
+
 .site-footer, .page-wrap:after {
     height: 50px;
 }
-.site-footer
-{
+
+.site-footer {
     line-height: 50px;
     text-align: center;
 }
-.site-footer p
-{
+
+.site-footer p {
     color: #222;
     display: inline-block;
 }
 
 /* styles for header */
-h2
-{
+h2 {
     text-align: center;
     margin: 0;
     padding: 20px;
 }
 
 /* styles for magic ball area */
-.magic-ball-area
-{
+.magic-ball-area {
     position: relative;
 }
 
-.magic-ball
-{
+.magic-ball {
     content: url("../images/ball.png");
     margin: 0 auto;
     padding: 25px;
     text-align: center;
 }
-.answer-element
-{
+
+.answer-element {
     position: absolute;
     top: 162px;
     text-align: center;
-    color:#FFF;
+    color: #FFF;
     font-size: 16px;
 }
 
 /* styles for question area */
-.question-element
-{
+.question-element {
     display: block;
     margin: 10px auto;
     width: 40%;
 }
 
-.answer-element
-{
+.answer-element {
     width: 100%;
 }
 

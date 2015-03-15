@@ -1,1 +1,36 @@
-<p>This is profile page.</p>
+<div ng-init="getQuestions()" ng-cloak>
+    <div class="profile-info">
+        <h4>{{userName}}, количество заданных вами вопросов равно: {{amountOfQuestions()}}.</h4>
+        <h5>На ваши вопросы были даны следующие типы ответов:</h5>
+
+        <div class="percent-info">
+            <div><a class="btn btn-success btn-min disabled"></a>
+                <span>{{createStringFor(0)}}</span></div>
+            <div><a class="btn btn-info btn-min disabled"></a>
+                <span>{{createStringFor(1)}}</span></div>
+            <div><a class="btn btn-warning btn-min disabled"></a>
+                <span>{{createStringFor(2)}}</span></div>
+            <div><a class="btn btn-danger btn-min disabled"></a>
+                <span>{{createStringFor(3)}}</span></div>
+        </div>
+        <div class="progress">
+            <div class="progress-bar progress-bar-success"
+                 ng-style="{width : ( getPercentage(questionTypes[0]) + '%' ) }"></div>
+            <div class="progress-bar progress-bar-info"
+                 ng-style="{width : ( getPercentage(questionTypes[1]) + '%' ) }"></div>
+            <div class="progress-bar progress-bar-warning"
+                 ng-style="{width : ( getPercentage(questionTypes[2]) + '%' ) }"></div>
+            <div class="progress-bar progress-bar-danger"
+                 ng-style="{width : ( getPercentage(questionTypes[3]) + '%' ) }"></div>
+        </div>
+        <h4>Ваши вопросы и ответы:</h4>
+    </div>
+
+    <div ng-repeat="q in questions | orderBy:'-DateTime'" class="profile-record" record-color>
+        <p ng-bind="q.DateTime"></p>
+
+        <p><b>Вопрос:</b> {{q.Text}}</p>
+
+        <p><b>Ответ:</b> {{q.Answer}}</p>
+    </div>
+</div>

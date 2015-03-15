@@ -1,9 +1,9 @@
 var sign = angular.module('sign', ['ngAnimate']);
 
-sign.controller('signController', function ($scope, $modalInstance, postService, $sessionStorage) {
+sign.controller('signController', function ($scope, $modalInstance, authService) {
     "use strict";
     $scope.authData = {
-        userName: '',
+        user: '',
         password: ''
     };
     $scope.alert = {
@@ -15,14 +15,22 @@ sign.controller('signController', function ($scope, $modalInstance, postService,
     };
     $scope.pressOk = function () {
         $scope.alert.isError = false;
-        postService.Login($scope.authData).then(function (response) {
+        authService.login($scope.authData).then(function (response) {
             if (response.status == 'success') {
-                $sessionStorage.token = response.token;
-                $sessionStorage.userName = response.user;
-                $modalInstance.close(response.user);
+                $modalInstance.close(response);
             } else {
                 $scope.alert.isError = true;
                 $scope.alert.text = response.message;
+            }
+        }, function (err) {
+        });
+    };
+
+    $scope.getLoginInfoByToken = function () {
+        authService.getLoginInfoByToken().then(function (response) {
+            if (response.status == 'success') {
+                $scope.authData.user = response.user;
+                $scope.authData.password = response.password;
             }
         }, function (err) {
         });
